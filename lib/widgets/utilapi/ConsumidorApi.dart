@@ -1,12 +1,13 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:async';
 
 import '../../modelos/usuario.dart';
 
 class ServiciosApi {
   final String apiUrl = 'http://localhost:8862/api/propietarios/autenticar';
 
-  Future<Propietario?> autenticarUsuario(String usuario, String clave) async {
+  FutureOr<Propietario?> autenticarUsuario(String usuario, String clave) async {
     print('datos recibidos : ' + usuario + ' clave ' + clave);
     if (usuario.isEmpty || clave.isEmpty) {
       print('Error al enviar datos');
@@ -42,7 +43,7 @@ class ServiciosApi {
     }
   }
 
-  Future<void> crear(String usuario, String clave, String codigo,
+  FutureOr<void> crear(String usuario, String clave, String codigo,
       String nombrecompleto) async {
     print('datos recibidos : ' + usuario + ' clave ' + clave);
     if (usuario.isEmpty || clave.isEmpty) {
@@ -72,7 +73,7 @@ class ServiciosApi {
     }
   }
 
-  Future<void> consultar() async {
+  FutureOr<void> consultar() async {
     final url = Uri.parse("http://localhost:8862/api/propietarios/");
     final response = await http.get(url, headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
